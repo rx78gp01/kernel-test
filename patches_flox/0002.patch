@@ -1,0 +1,25 @@
+From 9c6a01c7c0f950d9d8386c1c670b1d2b4e4c63a2 Mon Sep 17 00:00:00 2001
+From: google <android@google.com>
+Date: Sat, 24 Dec 2022 21:32:43 -0800
+Subject: [PATCH] update defconfig"
+
+
+---
+
+
+diff --git a/arch/arm/configs/elementalx_defconfig b/arch/arm/configs/elementalx_defconfig
+index 731b872..47f66c0 100644
+--- a/arch/arm/configs/elementalx_defconfig
++++ b/arch/arm/configs/elementalx_defconfig
+@@ -97,7 +97,7 @@ CONFIG_CGROUP_PERF is not set
+ CONFIG_CGROUP_SCHED=y
+ CONFIG_FAIR_GROUP_SCHED=y
+ # CONFIG_CFS_BANDWIDTH is not set
+-CONFIG_RT_GROUP_SCHED=y
++# CONFIG_RT_GROUP_SCHED is not set
+ CONFIG_BLK_CGROUP=y
+ # CONFIG_CHECKPOINT_RESTORE is not set
+ CONFIG_NAMESPACES=y
+-- 
+2.7.4
+
