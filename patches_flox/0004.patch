@@ -1,0 +1,29 @@
+diff --git a/drivers/staging/prima/CORE/SME/inc/csrSupport.h b/drivers/staging/prima/CORE/SME/inc/csrSupport.h
+index 7d31115..94c6b05 100755
+--- a/drivers/staging/prima/CORE/SME/inc/csrSupport.h
++++ b/drivers/staging/prima/CORE/SME/inc/csrSupport.h
+@@ -556,7 +556,10 @@ typedef __ani_attr_pre_packed struct tagCsrRSNCapabilities
+     tANI_U16 NoPairwise:1;
+     tANI_U16 PTKSAReplayCounter:2;
+     tANI_U16 GTKSAReplayCounter:2;
+-    tANI_U16 Reserved:10;
++    tANI_U16 MGMTFrameProtectionRequired:1;
++    tANI_U16 MGMTFrameProtectionCapable:1;
++    tANI_U16 PeerKeyEnabled:1;
++    tANI_U16 Reserved:7;
+ } __ani_attr_packed tCsrRSNCapabilities;
+ 
+ typedef __ani_attr_pre_packed struct tagCsrRSNPMKIe 
+diff --git a/drivers/staging/prima/CORE/SME/src/csr/csrUtil.c b/drivers/staging/prima/CORE/SME/src/csr/csrUtil.c
+index bf665d9..3a16d72 100755
+--- a/drivers/staging/prima/CORE/SME/src/csr/csrUtil.c
++++ b/drivers/staging/prima/CORE/SME/src/csr/csrUtil.c
+@@ -3737,6 +3737,8 @@ tANI_U8 csrConstructRSNIe( tHalHandle hHal, tANI_U32 sessionId, tCsrRoamProfile
+         // just putting back APs capabilities
+         // For one, we shouldn't EVER be sending out "pre-auth supported".  It is an AP only capability
+         RSNCapabilities.PreAuthSupported = 0;
++        RSNCapabilities.MGMTFrameProtectionRequired = 0;
++        RSNCapabilities.MGMTFrameProtectionCapable = 0;
+         *(tANI_U16 *)( &pAuthSuite->AuthOui[ 1 ] ) = *((tANI_U16 *)(&RSNCapabilities));
+ 
+         pPMK = (tCsrRSNPMKIe *)( ((tANI_U8 *)(&pAuthSuite->AuthOui[ 1 ])) + sizeof(tANI_U16) );
